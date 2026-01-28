@@ -4,7 +4,8 @@
   "description": "A",
   "main": "cypress.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "betest": "cypress run --spec 'cypress/e2e/reqRes.cy.ts'",
+    "cy:open": "cypress open"
   },
   "repository": {
     "type": "git",
