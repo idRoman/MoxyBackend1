@@ -6,6 +6,10 @@ interface User {
     last_name: string;
     avatar: string;
 }
+interface userData {
+    name: string;
+    job: string;
+}
 
 const customHeader = (apiKey: string) => ({
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
@@ -15,7 +19,7 @@ const customHeader = (apiKey: string) => ({
 
 const apiKey = Cypress.env('apiKey');
 const timeLimit = 300; // 300 ms
-let userData: any;
+let userData: userData[];
 
 describe('Moxymind Backend Test', () => {
 
@@ -67,8 +71,8 @@ describe('Moxymind Backend Test', () => {
     });
 
     it('POST - Should create users from external data and assert responses and duration', () => {
-        cy.fixture('users').then((userData) => {
-            userData.forEach((user: { name: string; job: string }) => {
+        cy.fixture('users').then((userData: userData[]) => {
+            userData.forEach((user) => {
                 cy.request({
                     method: 'POST',
                     url: `${Cypress.config().baseUrl}/users`,
